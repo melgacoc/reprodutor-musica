@@ -5,7 +5,6 @@ class NotFound extends React.Component {
     return (
 
       <div data-testid="page-not-found">
-        a
       </div>
     );
   }

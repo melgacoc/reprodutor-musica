@@ -1,12 +1,13 @@
 import React from 'react';
-// import { Route } from 'react-router-dom';
+import Header from './Components/Header';
+import { Route } from 'react-router-dom';
 
 class Search extends React.Component {
   render() {
     return (
-
       <div data-testid="page-search">
-        a
+        <Header />
+        <p>a</p>
       </div>
     );
   }
