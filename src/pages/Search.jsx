@@ -5,7 +5,7 @@ import Header from './Components/Header';
 class Search extends React.Component {
   state = {
     isSearchButtonDisabled: true,
-    searchField:'',
+    searchField: '',
   }
 
   isSearchButtonDisabled = () => {
@@ -19,7 +19,7 @@ class Search extends React.Component {
     });
   }
 
-  searchButton = (event) => {
+  searchInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     }, () => {
@@ -37,17 +37,21 @@ class Search extends React.Component {
         <Header />
         <p>a</p>
         <div>
-          <input data-testid="search-artist-input"
-          type="search"
-          name="searchField"
-          value={ searchField }
-          id=""
-          placeholder='Nome do Artista'
-          onChange={ this.searchButton }
+          <input
+            data-testid="search-artist-input"
+            type="search"
+            name="searchField"
+            value={ searchField }
+            id=""
+            placeholder="Nome do Artista"
+            onChange={ this.searchInput }
           />
-          <button data-testid="search-artist-button"
-          disabled={ isSearchButtonDisabled}
-          onClick={ this.search }>
+          <button
+            data-testid="search-artist-button"
+            disabled={ isSearchButtonDisabled }
+            onClick={ this.onSearchButton }
+            type="submit"
+          >
             Pesquisar
           </button>
         </div>
