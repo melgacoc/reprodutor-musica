@@ -14,7 +14,8 @@ class Login extends React.Component {
   isSaveButtonDisabled = () => {
     const {
       name } = this.state;
-    const verifyInput = name.length < 3;
+    const number = 3;
+    const verifyInput = name.length < number;
 
     this.setState({
       isButtonDisabled: verifyInput,
@@ -22,71 +23,75 @@ class Login extends React.Component {
   }
 
  loginButton = (event) => {
-  this.setState({
-    [event.target.name]: event.target.value,
-  }, () => {
-    this.isSaveButtonDisabled();
-  });
+   this.setState({
+     [event.target.name]: event.target.value,
+   }, () => {
+     this.isSaveButtonDisabled();
+   });
  }
 
- onSaveButtonClick = async (event) =>  {
-  event.preventDefault();
-  const {
-    name } = this.state;
+ onSaveButtonClick = async (event) => {
+   event.preventDefault();
+   const {
+     name } = this.state;
 
-  this.setState({
-    loading: true,
-  }, async () => {
-    await createUser({ name });
+   this.setState({
+     loading: true,
+   }, async () => {
+     await createUser({ name });
 
-    this.setState({
-      loading: false,
-      redirection: true,
-    });
-  });
-  console.log('a');
+     this.setState({
+       loading: false,
+       redirection: true,
+     });
+   });
+   console.log('a');
  }
 
-  render() {
-    const {
-      isButtonDisabled,
-      name,
-      loading,
-      redirection, } = this.state;
-    return (
-      <div data-testid="page-login">
-        {
-          loading === false ?(
-            <div>
-              <div>
-              <input data-testid="login-name-input"
-                name="name"
-                type="text"
-                onChange={ this.loginButton }
-                value={ name }
-              />
-              <button data-testid="login-submit-button"
-                name="isButtonDisabed"
-                type="submit"
-                disabled = { isButtonDisabled }
-                onClick={ this.onSaveButtonClick }>
-                  Entrar
-              </button>
-            </div>
-            </div>
-          ) : (
-               <div>
-                 <Loading/>
-               </div>
-         )}
-         {
-          redirection === true ?(
-            <Redirect to="/search" />
-          ) : (null)
-         }
-      </div>
-    );
-  }
+ render() {
+   const {
+     isButtonDisabled,
+     name,
+     loading,
+     redirection } = this.state;
+   return (
+     <div data-testid="page-login">
+       {
+         loading === false ? (
+           <div>
+             <div>
+               <input
+                 data-testid="login-name-input"
+                 name="name"
+                 type="text"
+                 onChange={ this.loginButton }
+                 value={ name }
+               />
+               <button
+                 data-testid="login-submit-button"
+                 name="isButtonDisabed"
+                 type="submit"
+                 disabled={ isButtonDisabled }
+                 onClick={ this.onSaveButtonClick }
+               >
+                 Entrar
+               </button>
+             </div>
+           </div>
+         ) : (
+           <div>
+             <Loading />
+           </div>
+         )
+       }
+       {
+         redirection === true ? (
+           <Redirect to="/search" />
+         ) : (null)
+       }
+     </div>
+   );
+ }
 }
 
 export default Login;

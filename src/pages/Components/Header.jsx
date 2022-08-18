@@ -1,8 +1,8 @@
 import React from 'react';
 import { getUser } from '../../services/userAPI';
-import Loading from '../Components/Loading';
+import Loading from './Loading';
 
-class Header extends React.Component{
+class Header extends React.Component {
   state = {
     user: {},
     loading: false,
@@ -14,36 +14,36 @@ class Header extends React.Component{
 
     this.setState({
       loading: true,
-    }, async () =>{
-        const getUserFromApi = await getUser();
+    }, async () => {
+      const getUserFromApi = await getUser();
 
       this.setState({
         user: getUserFromApi,
         loading: false,
-      })
+      });
     });
-    console.log(user)
+    console.log(user);
   }
 
   render() {
     const {
       user,
-      loading } = this.state
+      loading } = this.state;
     return (
       <header data-testid="header-component">
         {
-          loading === false ?(
-            <p data-testid="header-user-name"
-             value={ user.name }>
-            </p>
+          loading === false ? (
+            <p
+              data-testid="header-user-name"
+              value={ user.name }
+            />
           ) : (
             <Loading />
           )
         }
-    </header>
-    )
+      </header>
+    );
   }
 }
-
 
 export default Header;
