@@ -8,6 +8,9 @@ class Search extends React.Component {
       <div data-testid="page-search">
         <Header />
         <p>a</p>
+        <div>
+          <input type="search" name="" id="" />
+        </div>
       </div>
     );
   }
