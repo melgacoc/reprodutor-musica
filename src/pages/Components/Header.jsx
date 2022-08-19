@@ -23,7 +23,6 @@ class Header extends React.Component {
         loading: false,
       });
     });
-    console.log(user);
   }
 
   render() {
