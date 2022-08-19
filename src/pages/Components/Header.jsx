@@ -10,9 +10,6 @@ class Header extends React.Component {
   }
 
   async componentDidMount() {
-    const {
-      user } = this.state;
-
     this.setState({
       loading: true,
     }, async () => {
