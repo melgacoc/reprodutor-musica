@@ -9,16 +9,15 @@ class Search extends React.Component {
     super(props);
     this.state = {
       searchResult: [],
+      isSearchButtonDisabled: true,
+      artist: '',
+      loadind: false,
+      resultRender: false,
+      searchField:'',
+      
     };
   }
 
-  state = {
-    isSearchButtonDisabled: true,
-    artist: '',
-    loadind: false,
-    resultRender: false,
-    searchField:'',
-  }
 
   isSearchButtonDisabled1 = () => {
     const {
