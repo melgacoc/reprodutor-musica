@@ -33,7 +33,6 @@ class MusicCard extends React.Component {
               name={ `checkbox-music-${trackId}` }
               id={ trackId }
               onClick={ this.onClick }
-              checked={ favorites }
             />
           </label>
         </audio>
