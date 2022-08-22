@@ -13,10 +13,9 @@ class Search extends React.Component {
       artist: '',
       loadind: false,
       resultRender: false,
-      searchField:'',
+      searchField: '',
     };
   }
-
 
   isSearchButtonDisabled1 = () => {
     const {
@@ -34,12 +33,11 @@ class Search extends React.Component {
   searchInput = (event) => {
     event.preventDefault();
     this.setState({
-      searchField: event.target.value
+      searchField: event.target.value,
     }, () => {
       this.isSearchButtonDisabled1();
     });
   }
-
 
   onSearchButton = (event) => {
     event.preventDefault();
