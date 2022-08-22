@@ -1,18 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-// import { Route } from 'react-router-dom';
 import Header from './Components/Header';
 import Loading from './Components/Loading';
 
 class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchResult: [],
+    };
+  }
+
   state = {
     isSearchButtonDisabled: true,
     searchField: '',
     artist: '',
     loadind: false,
     resultRender: false,
-    searchResult: [],
   }
 
   isSearchButtonDisabled = () => {
