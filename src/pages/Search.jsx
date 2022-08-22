@@ -14,7 +14,6 @@ class Search extends React.Component {
       loadind: false,
       resultRender: false,
       searchField:'',
-      
     };
   }
 
@@ -41,17 +40,6 @@ class Search extends React.Component {
     });
   }
 
-  fixInput = () => {
-    const {
-      searchField,
-    } = this.state;
-    if ( searchField === undefined){
-      this.setState({
-        isSearchButtonDisabled1: true,
-      });
-    } else this.searchInput();
-
-  }
 
   onSearchButton = (event) => {
     event.preventDefault();
