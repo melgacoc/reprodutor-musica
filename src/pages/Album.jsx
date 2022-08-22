@@ -8,7 +8,7 @@ class Album extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      serchAlbumResult: [],
+     serchAlbumResult: [],
     };
   }
 
@@ -42,8 +42,8 @@ class Album extends React.Component {
               </div>
             ) : (null)
           }
-          {musics.map(({ trackName, previewUrl, index }) => (
-            <div key={ index }>
+          {musics.map(({ trackName, previewUrl, trackId }) => (
+            <div key={ trackId }>
               <MusicCard
                 trackName={ trackName }
                 previewUrl={ previewUrl }

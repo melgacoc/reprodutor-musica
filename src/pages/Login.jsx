@@ -15,10 +15,10 @@ class Login extends React.Component {
     const {
       name } = this.state;
     const number = 3;
-    const verifyInput = name.length < number;
+    const verifyInput1 = name.length < number;
 
     this.setState({
-      isButtonDisabled: verifyInput,
+      isButtonDisabled: verifyInput1,
     });
   }
 

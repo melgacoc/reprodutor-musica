@@ -19,16 +19,15 @@ class MusicCard extends React.Component {
           {' '}
           {' '}
           <code>audio</code>
-          .
-        </audio>
-        <label htmlFor="favorite">
+          .<label data-testid={ `checkbox-music-${trackId}` }
+        htmlFor="favorite">
           Favorita
           <input
-            data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
             name="favorite"
           />
         </label>
+        </audio>
 
       </div>
     );

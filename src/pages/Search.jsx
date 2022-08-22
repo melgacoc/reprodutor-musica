@@ -14,29 +14,44 @@ class Search extends React.Component {
 
   state = {
     isSearchButtonDisabled: true,
-    searchField: '',
     artist: '',
     loadind: false,
     resultRender: false,
+    searchField:'',
   }
 
-  isSearchButtonDisabled = () => {
+  isSearchButtonDisabled1 = () => {
     const {
       searchField } = this.state;
-    const number = 2;
-    const verifyInput = searchField.length < number;
+    const number = 1;
+    const verifyInput = searchField.length <= number;
     // verificar caracteres especiais
+
     this.setState({
       isSearchButtonDisabled: verifyInput,
     });
+    console.log(searchField);
   }
 
   searchInput = (event) => {
+    event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value,
+      searchField: event.target.value
     }, () => {
-      this.isSearchButtonDisabled();
+      this.isSearchButtonDisabled1();
     });
+  }
+
+  fixInput = () => {
+    const {
+      searchField,
+    } = this.state;
+    if ( searchField === undefined){
+      this.setState({
+        isSearchButtonDisabled1: true,
+      });
+    } else this.searchInput();
+
   }
 
   onSearchButton = (event) => {
@@ -82,10 +97,10 @@ class Search extends React.Component {
             <div>
               <input
                 data-testid="search-artist-input"
-                type="search"
+                type="text"
                 name="searchField"
+                id="searchField"
                 value={ searchField }
-                id=""
                 placeholder="Nome do Artista"
                 onChange={ this.searchInput }
               />
