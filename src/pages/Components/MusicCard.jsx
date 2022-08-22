@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { addSong } from '../../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
-  state = {
-    // favorites: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
   }
 
   render() {
@@ -21,13 +24,16 @@ class MusicCard extends React.Component {
           <code>audio</code>
           .
           <label
+            htmlFor={ `checkbox-music-${trackId}` }
             data-testid={ `checkbox-music-${trackId}` }
-            htmlFor="favorite"
           >
             Favorita
             <input
               type="checkbox"
-              name="favorite"
+              name={ `checkbox-music-${trackId}` }
+              id={ trackId }
+              onClick={ this.onClick }
+              checked={ favorites }
             />
           </label>
         </audio>
