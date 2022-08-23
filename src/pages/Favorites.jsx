@@ -1,14 +1,64 @@
 import React from 'react';
-import Header from './Components/Header';
+import MusicCard from './Components/MusicCard';
+import { getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import Loading from './Components/Loading';
 
 class Favorites extends React.Component {
-  render() {
-    return (
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorites: [],
+      loading: false,
+    };
+  }
 
-      <div data-testid="page-favorites">
-        <Header />
+  async componentDidMount() {
+    this.setState({
+      loading:true,
+    }, async () => {
+      const recovered = await getFavoriteSongs();
+      this.setState({
+         favorites: recovered,
+         loading: false,
+      });
+    })
+  }
+
+  async handleClick(music) {
+    const { favorites } = this.state;
+    if (favorites.some((fav) => (
+      fav.trackId === music.trackId
+    ))){
+      this.setState({
+        loading: true,
+      });
+      await removeSong(music);
+      const attFavorites = favorites.filter((element) => (
+        element.trackId !== music.trackId
+      ));
+      return this.setState({
+        loading: false,
+        favorites: attFavorites,
+      });
+    }
+  }
+
+  render() {
+    const { loading, favorites } = this.state
+    return (
+      <div>
+        {
+          loading ? (
+            <Loading />
+          ) : (
+            <div>
+              <MusicCard 
+               musics={ favorites }/>
+            </div>
+          )
+        }
       </div>
-    );
+    )
   }
 }
 

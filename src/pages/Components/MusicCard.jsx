@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends React.Component {
@@ -12,14 +12,31 @@ class MusicCard extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
-
+  // Vnicius me ajudou no componente e na handleClick
   async componentDidMount() {
     const recovered = await getFavoriteSongs();
     this.setState({ favorites: recovered });
   }
 
   async handleClick(music) {
+    // lógica req 11
     const { favorites } = this.state;
+    if (favorites.some((fav) => (
+      fav.trackId === music.trackId
+    ))){
+      this.setState({
+        loading: true,
+      });
+      await removeSong(music);
+      const attFavorites =favorites.filter((element) => (
+        element.trackId !== music.trackId
+      ));
+      return this.setState({
+        loading: false,
+        favorites: attFavorites,
+      });
+    }
+    // lógica req 8
     this.setState({
       loading: true,
     }, async () => {
@@ -37,7 +54,7 @@ class MusicCard extends React.Component {
     return (
       <div>
         {
-          loading === true ? (
+          loading ? (
             <Loading />
           ) : (
             <div>
