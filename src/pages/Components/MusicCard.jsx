@@ -12,6 +12,7 @@ class MusicCard extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
+
   // Vnicius me ajudou no componente e na handleClick
   async componentDidMount() {
     const recovered = await getFavoriteSongs();
@@ -20,15 +21,16 @@ class MusicCard extends React.Component {
 
   async handleClick(music) {
     // lógica req 11
+    console.log('linha 22');
     const { favorites } = this.state;
     if (favorites.some((fav) => (
       fav.trackId === music.trackId
-    ))){
+    ))) {
       this.setState({
         loading: true,
       });
       await removeSong(music);
-      const attFavorites =favorites.filter((element) => (
+      const attFavorites = favorites.filter((element) => (
         element.trackId !== music.trackId
       ));
       return this.setState({
@@ -40,6 +42,7 @@ class MusicCard extends React.Component {
     this.setState({
       loading: true,
     }, async () => {
+      console.log('linha 42');
       await addSong(music);
       this.setState({
         loading: false,
@@ -81,7 +84,7 @@ class MusicCard extends React.Component {
                       <input
                         type="checkbox"
                         onChange={ () => this.handleClick(music) }
-                        name={ `checkbox-music-${trackId}` }
+                        id={ `checkbox-music-${trackId}` }
                         checked={ favorites.some((fav) => (
                           fav.trackId === music.trackId
                         )) }

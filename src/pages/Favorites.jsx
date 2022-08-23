@@ -14,21 +14,21 @@ class Favorites extends React.Component {
 
   async componentDidMount() {
     this.setState({
-      loading:true,
+      loading: true,
     }, async () => {
       const recovered = await getFavoriteSongs();
       this.setState({
-         favorites: recovered,
-         loading: false,
+        favorites: recovered,
+        loading: false,
       });
-    })
+    });
   }
 
   async handleClick(music) {
     const { favorites } = this.state;
     if (favorites.some((fav) => (
       fav.trackId === music.trackId
-    ))){
+    ))) {
       this.setState({
         loading: true,
       });
@@ -44,7 +44,7 @@ class Favorites extends React.Component {
   }
 
   render() {
-    const { loading, favorites } = this.state
+    const { loading, favorites } = this.state;
     return (
       <div>
         {
@@ -52,13 +52,14 @@ class Favorites extends React.Component {
             <Loading />
           ) : (
             <div>
-              <MusicCard 
-               musics={ favorites }/>
+              <MusicCard
+                musics={ favorites }
+              />
             </div>
           )
         }
       </div>
-    )
+    );
   }
 }
 
