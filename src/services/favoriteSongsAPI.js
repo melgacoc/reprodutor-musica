@@ -29,16 +29,12 @@ export const getFavoriteSongs = () => new Promise((resolve) => {
 });
 
 export const addSong = (song) => new Promise((resolve) => {
- 
   if (song) {
-    
     const favoriteSongs = readFavoriteSongs();
     saveFavoriteSongs([...favoriteSongs, song]);
-    
   }
-  
+
   simulateRequest(SUCCESS_STATUS)(resolve);
- 
 });
 
 export const removeSong = (song) => new Promise((resolve) => {

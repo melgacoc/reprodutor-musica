@@ -27,39 +27,39 @@ class Album extends React.Component {
   render() {
     const {
       serchAlbumResult, loading } = this.state;
-     const musics = serchAlbumResult.filter((music) => music.kind === 'song');
+    const musics = serchAlbumResult.filter((music) => music.kind === 'song');
     return (
       <div data-testid="page-album">
         {
           loading ? (
             <Loading />
           ) : (
-      <div>
-        <Header />
-        <div>
-          {
-            serchAlbumResult.length > 0 ? (
+            <div>
+              <Header />
               <div>
-                <h2 data-testid="album-name">
-                  { serchAlbumResult[0].collectionName }
-                </h2>
-                <h3 data-testid="artist-name">
-                  { serchAlbumResult[0].artistName }
-                </h3>
+                {
+                  serchAlbumResult.length > 0 ? (
+                    <div>
+                      <h2 data-testid="album-name">
+                        { serchAlbumResult[0].collectionName }
+                      </h2>
+                      <h3 data-testid="artist-name">
+                        { serchAlbumResult[0].artistName }
+                      </h3>
+                    </div>
+                  ) : (
+                    <p>
+                      a
+                    </p>
+                  )
+                }
+                <div>
+                  <MusicCard
+                    musics={ musics }
+                  />
+                </div>
               </div>
-            ) : (
-              <p>
-                a
-              </p>
-            )
-          }
-          <div>
-          <MusicCard
-                musics={ musics }
-              />
-          </div>
-        </div>
-      </div>
+            </div>
           )
         }
       </div>

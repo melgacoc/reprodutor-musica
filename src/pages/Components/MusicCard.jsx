@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { addSong } from '../../services/favoriteSongsAPI';
 import Loading from './Loading';
 
-
 class MusicCard extends React.Component {
   constructor(props) {
     super(props);
@@ -11,27 +10,27 @@ class MusicCard extends React.Component {
       favorites: [],
       loading: false,
     };
-    this.handleClick=this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
-  //async componentDidMount() {
-    //const recovered = await getFavoriteSongs();
-    //this.setState({ favorites: recovered });
- // }
+  // async componentDidMount() {
+  // const recovered = await getFavoriteSongs();
+  // this.setState({ favorites: recovered });
+  // }
 
-   async handleClick(music) {
+  async handleClick(music) {
     const { favorites } = this.state;
     this.setState({
       loading: true,
     }, async () => {
-      console.log(music)
+      console.log(music);
       await addSong(music);
-      console.log('linha 24 depoi da requição')
+      console.log('linha 24 depoi da requição');
       this.setState({
         loading: false,
-        favorites: [...favorites, music]
-      })
-    })
-   }
+        favorites: [...favorites, music],
+      });
+    });
+  }
 
   render() {
     const { loading, favorites } = this.state;
@@ -39,36 +38,42 @@ class MusicCard extends React.Component {
     return (
       <div>
         {
-          loading === true ?(
+          loading === true ? (
             <Loading />
           ) : (
             <div>
-              {musics.map((music) =>{
-                
-                const { trackName, trackId, previewUrl} = music;
-                return(
+              {musics.map((music) => {
+                const { trackName, trackId, previewUrl } = music;
+                return (
                   <div key={ trackId }>
                     <h1>
                       { trackName }
                     </h1>
-                    <audio data-testid="audio-component" src={previewUrl} controls>
-  <track kind="captions" />
-  O seu navegador não suporta o elemento{" "} <code>audio</code>.
-</audio>
-                 <label htmlFor={ `checkbox-music-${trackId}`}
-                 data-testid={ `checkbox-music-${trackId}`}>
-                  Favorita 
-                  <input type="checkbox"
-                  onChange={ () => this.handleClick(music)}
-                  name={ `checkbox-music-${trackId}`}
-                  checked={ favorites.some((fav) => (
-                    fav.trackId === music.trackId
-                  ))} />
-                 </label>
+                    <audio data-testid="audio-component" src={ previewUrl } controls>
+                      <track kind="captions" />
+                      O seu navegador não suporta o elemento
+                      {' '}
+                      {' '}
+                      <code>audio</code>
+                      .
+                    </audio>
+                    <label
+                      htmlFor={ `checkbox-music-${trackId}` }
+                      data-testid={ `checkbox-music-${trackId}` }
+                    >
+                      Favorita
+                      <input
+                        type="checkbox"
+                        onChange={ () => this.handleClick(music) }
+                        name={ `checkbox-music-${trackId}` }
+                        checked={ favorites.some((fav) => (
+                          fav.trackId === music.trackId
+                        )) }
+                      />
+                    </label>
                   </div>
-                )
-              })
-              }
+                );
+              })}
             </div>
           )
         }
