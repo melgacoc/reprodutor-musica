@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends React.Component {
@@ -12,10 +12,11 @@ class MusicCard extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  // async componentDidMount() {
-  // const recovered = await getFavoriteSongs();
-  // this.setState({ favorites: recovered });
-  // }
+
+  async componentDidMount() {
+  const recovered = await getFavoriteSongs();
+  this.setState({ favorites: recovered });
+  }
 
   async handleClick(music) {
     const { favorites } = this.state;
