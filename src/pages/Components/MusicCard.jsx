@@ -14,8 +14,8 @@ class MusicCard extends React.Component {
   }
 
   async componentDidMount() {
-  const recovered = await getFavoriteSongs();
-  this.setState({ favorites: recovered });
+    const recovered = await getFavoriteSongs();
+    this.setState({ favorites: recovered });
   }
 
   async handleClick(music) {
@@ -23,9 +23,7 @@ class MusicCard extends React.Component {
     this.setState({
       loading: true,
     }, async () => {
-      console.log(music);
       await addSong(music);
-      console.log('linha 24 depoi da requição');
       this.setState({
         loading: false,
         favorites: [...favorites, music],
