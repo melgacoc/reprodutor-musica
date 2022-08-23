@@ -47,7 +47,7 @@ class Favorites extends React.Component {
   render() {
     const { loading, favorites } = this.state;
     return (
-      <div >
+      <div>
         <Header />
         {
           loading ? (
