@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import Header from './Components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from './Components/MusicCard';
+import Loading from './Components/Loading';
 
 class Album extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       serchAlbumResult: [],
+      loading: true,
     };
   }
 
@@ -18,15 +20,21 @@ class Album extends React.Component {
 
     this.setState({
       serchAlbumResult: awaitResult,
+      loading: false,
     });
   }
 
   render() {
     const {
-      serchAlbumResult } = this.state;
-    const musics = serchAlbumResult.filter((music) => music.kind === 'song');
+      serchAlbumResult, loading } = this.state;
+     const musics = serchAlbumResult.filter((music) => music.kind === 'song');
     return (
       <div data-testid="page-album">
+        {
+          loading ? (
+            <Loading />
+          ) : (
+      <div>
         <Header />
         <div>
           {
@@ -38,20 +46,22 @@ class Album extends React.Component {
                 <h3 data-testid="artist-name">
                   { serchAlbumResult[0].artistName }
                 </h3>
-
               </div>
-            ) : (null)
+            ) : (
+              <p>
+                a
+              </p>
+            )
           }
-          {musics.map(({ trackName, previewUrl, trackId }) => (
-            <div key={ trackId }>
-              <MusicCard
-                trackName={ trackName }
-                previewUrl={ previewUrl }
-                trackId={ trackId }
+          <div>
+          <MusicCard
+                musics={ musics }
               />
-            </div>
-          ))}
+          </div>
         </div>
+      </div>
+          )
+        }
       </div>
     );
   }
