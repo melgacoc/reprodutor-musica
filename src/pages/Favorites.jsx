@@ -1,6 +1,6 @@
 import React from 'react';
 import MusicCard from './Components/MusicCard';
-import { getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Components/Loading';
 import Header from './Components/Header';
 
@@ -11,37 +11,22 @@ class Favorites extends React.Component {
       favorites: [],
       loading: false,
     };
+    this.attList = this.attList.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.attList();
+  }
+
+  async attList() {
     this.setState({
       loading: true,
-    }, async () => {
-      const recovered = await getFavoriteSongs();
-      this.setState({
-        favorites: recovered,
-        loading: false,
-      });
     });
-  }
-
-  async handleClick(music) {
-    const { favorites } = this.state;
-    if (favorites.some((fav) => (
-      fav.trackId === music.trackId
-    ))) {
-      this.setState({
-        loading: true,
-      });
-      await removeSong(music);
-      const attFavorites = favorites.filter((element) => (
-        element.trackId !== music.trackId
-      ));
-      return this.setState({
-        loading: false,
-        favorites: attFavorites,
-      });
-    }
+    const attFavorites = await getFavoriteSongs();
+    return this.setState({
+      loading: false,
+      favorites: attFavorites,
+    });
   }
 
   render() {
@@ -56,6 +41,7 @@ class Favorites extends React.Component {
             <div data-testid="page-favorites">
               <MusicCard
                 musics={ favorites }
+                attList={ this.attList }
               />
             </div>
           )
@@ -64,5 +50,8 @@ class Favorites extends React.Component {
     );
   }
 }
+
+Favorites.propTypes = {
+};
 
 export default Favorites;

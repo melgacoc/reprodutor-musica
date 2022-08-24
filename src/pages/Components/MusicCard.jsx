@@ -21,7 +21,7 @@ class MusicCard extends React.Component {
 
   async handleClick(music) {
     // lógica req 11
-    console.log('linha 22');
+    const { attList } = this.props;
     const { favorites } = this.state;
     if (favorites.some((fav) => (
       fav.trackId === music.trackId
@@ -30,6 +30,8 @@ class MusicCard extends React.Component {
         loading: true,
       });
       await removeSong(music);
+      // atualiza no favorites
+      await attList();
       const attFavorites = favorites.filter((element) => (
         element.trackId !== music.trackId
       ));
@@ -42,7 +44,6 @@ class MusicCard extends React.Component {
     this.setState({
       loading: true,
     }, async () => {
-      console.log('linha 42');
       await addSong(music);
       this.setState({
         loading: false,
@@ -83,7 +84,7 @@ class MusicCard extends React.Component {
                       Favorita
                       <input
                         type="checkbox"
-                        onChange={ () => this.handleClick(music) }
+                        onChange={ (event) => this.handleClick(music, event) }
                         id={ `checkbox-music-${trackId}` }
                         checked={ favorites.some((fav) => (
                           fav.trackId === music.trackId
@@ -107,6 +108,11 @@ MusicCard.propTypes = {
       artistId: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  attList: PropTypes.func,
+};
+
+MusicCard.defaultProps = {
+  attList: () => {},
 };
 
 export default MusicCard;
