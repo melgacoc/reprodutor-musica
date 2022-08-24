@@ -49,7 +49,7 @@ class Album extends React.Component {
                     </div>
                   ) : (
                     <p>
-                      a
+                      ab
                     </p>
                   )
                 }
