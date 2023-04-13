@@ -31,7 +31,7 @@ class Header extends React.Component {
         {
           loading === false ? (
             <p data-testid="header-user-name">
-              { `Bem vindo ${user.name}` }
+              { `Welcome ${user.name}` }
             </p>
           ) : (
             <Loading />
@@ -42,21 +42,21 @@ class Header extends React.Component {
             data-testid="link-to-search"
             to="/search"
           >
-            Buscar música ou artista
+            Find ur vibe
           </Link>
           <br />
           <Link
             data-testid="link-to-favorites"
             to="/favorites"
           >
-            Favoritas
+            Favs
           </Link>
           <br />
           <Link
             data-testid="link-to-profile"
             to="/profile"
           >
-            Meu perfil
+            Profile
           </Link>
         </nav>
       </header>

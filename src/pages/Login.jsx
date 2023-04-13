@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Loading from './Components/Loading';
+import '../styles/Login.css'
 
 class Login extends React.Component {
   state = {
@@ -54,20 +55,24 @@ class Login extends React.Component {
      loading,
      redirection } = this.state;
    return (
-     <div data-testid="page-login">
+     <div className="Login-body">
        {
          loading === false ? (
            <div>
-             <div>
+             <div className="Login-container">
+               <h1 className="Login-title">
+                vibeTunes
+                </h1>
                <input
-                 data-testid="login-name-input"
+                 className="Login-input"
                  name="name"
                  type="text"
+                 placeholder="Name"
                  onChange={ this.loginButton }
                  value={ name }
                />
                <button
-                 data-testid="login-submit-button"
+                 className="Login-btn"
                  name="isButtonDisabed"
                  type="submit"
                  disabled={ isButtonDisabled }
